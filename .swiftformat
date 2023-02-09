@@ -1,0 +1,10 @@
+--acronyms true
+--indent 2
+--binarygrouping 4
+--decimalgrouping 3
+--hexliteralcase "lowercase"
+--swiftversion 5.5.2
+--enable acronyms
+--enable blockComments
+--enable preferDouble
+--enable sortedSwitchCases

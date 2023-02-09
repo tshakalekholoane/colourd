@@ -1,0 +1,14 @@
+.DS_Store
+.netrc
+.swiftpm/config/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+/*.xcodeproj
+/.build
+/.vscode
+/Packages
+DerivedData/
+xcuserdata/
+
+Colourd
+!Colourd/
+Colourd.log
