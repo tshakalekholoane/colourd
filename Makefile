@@ -1,3 +1,6 @@
+APP := colourd
+BUILD_DIR := .build
+
 ## help: print this help message
 .PHONY: help
 help:
@@ -7,11 +10,21 @@ help:
 ## clean: delete build artefacts
 .PHONY: clean
 clean:
-	-rm -rf .build/ colourd
+	swift package clean
 
-## release: compiles a multiarchitecture binary for amd64 and arm64
-.PHONY: release
+## release: compile a release build of the application
+.PHONY: release 
 release:
+	swift build --configuration release
+
+## run: run the application
+.PHONY: run
+run: release 
+	$(BUILD_DIR)/release/$(APP)
+
+## universal: compiles a multiarchitecture binary for amd64 and arm64
+.PHONY: universal 
+universal:
 	swift build --configuration release --triple arm64-apple-macosx
 	swift build --configuration release --triple x86_64-apple-macosx
-	lipo -create -output colourd .build/arm64-apple-macosx/release/colourd .build/x86_64-apple-macosx/release/colourd
+	lipo -create -output $(APP) $(BUILD_DIR)/arm64-apple-macosx/release/$(APP) $(BUILD_DIR)/x86_64-apple-macosx/release/$(APP)
