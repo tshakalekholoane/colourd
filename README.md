@@ -1,6 +1,6 @@
 # `colourd`
 
-`colourd` is a daemon that observes when the theme changes on macOS and executes all the files in the `$HOME/.config/colourd/` directory.
+`colourd` is a daemon that observes when the theme changes on macOS and executes all the files in the `~/Library/Application Support/colourd/` directory.
 
 ## Installation
 
