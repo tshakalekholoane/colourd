@@ -1,5 +1,7 @@
 APP := colourd
-BUILD_DIR := .build
+BUILD_DIR := $(PWD)/.build
+PARAMS := dev.tshaka.colourd.plist
+TARGET_DIR := /usr/local/bin
 
 ## help: print this help message
 .PHONY: help
@@ -12,12 +14,26 @@ help:
 clean:
 	swift package clean
 
+## install: build and install the daemon
+.PHONY: install
+install: release load link
+
+## link: create a symbolic link in /usr/local/bin
+.PHONY: link
+link:
+	ln -sf $(BUILD_DIR)/release/$(APP) $(TARGET_DIR)/$(APP)
+
+## load: load the parameters
+.PHONY: load
+load:
+	cp -f $(PWD)/$(PARAMS) $(HOME)/Library/LaunchAgents/$(PARAMS)
+
 ## release: compile a release build of the application
 .PHONY: release 
 release:
 	swift build --configuration release
 
-## run: run the application
+## run: run the daemon
 .PHONY: run
 run: release 
 	$(BUILD_DIR)/release/$(APP)
