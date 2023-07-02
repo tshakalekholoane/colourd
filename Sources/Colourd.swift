@@ -50,28 +50,26 @@ enum Colourd {
       forName: themeChangedNofitication,
       object: nil,
       queue: nil,
-      using: runPrograms
+      using: { _ in
+        log.info("Theme changed")
+        for program in programs {
+          do {
+            try Process
+              .run(program, arguments: [currentAppearance])
+              .waitUntilExit()
+          } catch {
+            log.error("\(error.localizedDescription)")
+          }
+        }
+      }
     )
     log.info("Registered notification")
-  }
-
-  @Sendable
-  private static func runPrograms(_: Notification) {
-    for program in programs {
-      do {
-        try Process
-          .run(program, arguments: [currentAppearance])
-          .waitUntilExit()
-      } catch {
-        log.error("\(error.localizedDescription)")
-      }
-    }
   }
 
   static func main() {
     registerSignalHandlerWithDispatchSource()
     registerNotification()
     log.info("Starting colourd")
-    dispatchMain()
+    NSApplication.shared.run()
   }
 }
