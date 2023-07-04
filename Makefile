@@ -23,7 +23,7 @@ link:
 	ln -sf $(BUILD_DIR)/release/$(APP) $(TARGET_DIR)/$(APP)
 
 ## release: compile a release build of the application
-.PHONY: release 
+.PHONY: release
 release:
 	swift build --configuration release
 
@@ -38,3 +38,8 @@ universal:
 	swift build --configuration release --triple arm64-apple-macosx
 	swift build --configuration release --triple x86_64-apple-macosx
 	lipo -create -output $(APP) $(BUILD_DIR)/arm64-apple-macosx/release/$(APP) $(BUILD_DIR)/x86_64-apple-macosx/release/$(APP)
+
+## unlink: remove the symobolic link in /usr/local/bin
+.PHONY: unlink
+unlink:
+	rm -f $(TARGET_DIR)/$(APP)
