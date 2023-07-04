@@ -4,11 +4,22 @@
 
 ## Installation
 
+### Source
+
 The application can be built from source by cloning the repository and running the following command which requires working versions of [Make](https://www.gnu.org/software/make/) and [Swift](https://www.swift.org) which come bundled with most macOS installations.
 
 ```shell
 git clone https://github.com/tshakalekholoane/colourd && cd colourd
-make release
+make install
+```
+
+### Homebrew
+
+Alternatively, using run the following commands using [Homebrew](https://brew.sh).
+
+```shell
+brew tap tshakalekholoane/taps
+brew install colourd
 ```
 
 ## Example
